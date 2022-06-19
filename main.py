@@ -2,26 +2,15 @@ from grabScreen import grab_screen
 import numpy as np
 import cv2
 import time
+
 from directKeys import PressKey, ReleaseKey, W, A, S, D
-
-def roi(img, vertices):
-    mask = np.zeros_like(img)
-    cv2.fillPoly(mask, vertices, 255)
-    masked = cv2.bitwise_and(img, mask)
-    return masked
-
-def process_img(img):
-    processed_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    processed_img = cv2.Canny(processed_img, threshold1=85, threshold2=255)
-    vertices = np.array([[10,500],[10,300],[300,200], [500,200], [800,300], [800,500]])
-    processed_img = roi(processed_img, [vertices])
-    return processed_img
+from detectLanes import detect_lanes
 
 def main():
     last_time = time.time()
     while True:
         screen = grab_screen(region=(0,40,800,640))
-        processed = process_img(screen)
+        processed = detect_lanes(screen)
         # print('pressing')
         # PressKey(0x11)
         # time.sleep(3)
