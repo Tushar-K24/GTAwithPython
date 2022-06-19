@@ -1,9 +1,7 @@
-from concurrent.futures import process
+from grabScreen import grab_screen
 import numpy as np
 import cv2
 import time
-import pyautogui
-from PIL import ImageGrab
 from directKeys import PressKey, ReleaseKey, W, A, S, D
 
 def roi(img, vertices):
@@ -22,7 +20,7 @@ def process_img(img):
 def main():
     last_time = time.time()
     while True:
-        screen = np.array(ImageGrab.grab(bbox=(0, 40, 800, 600))) #x, y, w, h
+        screen = grab_screen(region=(0,40,800,640))
         processed = process_img(screen)
         # print('pressing')
         # PressKey(0x11)

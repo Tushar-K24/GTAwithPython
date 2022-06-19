@@ -56,9 +56,3 @@ def ReleaseKey(hexKeyCode):
     ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
 # directx scan codes https://gist.github.com/tracend/912308
-if __name__ == '__main__':
-    while (True):
-        PressKey(0x11)
-        time.sleep(1)
-        ReleaseKey(0x11)
-        time.sleep(1)
